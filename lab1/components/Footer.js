@@ -1,6 +1,6 @@
 import {Text, View, StyleSheet} from "react-native";
 
-const userInfo = "Name Surname, Group";
+const userInfo = "Прізвище ім'я по-батькові, група";
 
 const Footer = () => (
     <View style={styles.footer}>
