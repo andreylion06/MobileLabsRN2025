@@ -163,5 +163,7 @@ fix_*.patch
 /packages/react-native-fantom/build/
 /packages/react-native-fantom/tester/build/
 
+.idea
+
 # [Experimental] Generated TS type definitions
 /packages/**/types_generated/
