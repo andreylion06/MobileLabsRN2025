@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withTiming,
+  withSequence,
+} from 'react-native-reanimated';
 import {
   GestureDetector,
   Gesture,
@@ -7,16 +14,30 @@ import {
 } from 'react-native-gesture-handler';
 
 const ClickableObject = ({ onScore }) => {
+  // Shared values for animations
+  const scale = useSharedValue(1);
+  const opacity = useSharedValue(1);
+  const rotate = useSharedValue(0);
+  const offset = useSharedValue({ x: 0, y: 0 });
+  const start = useSharedValue({ x: 0, y: 0 });
+  const savedScale = useSharedValue(1);
+
   // Tap gesture
   const tap = Gesture.Tap()
     .runOnJS(true)
     .numberOfTaps(1)
+    .onStart(() => {
+      scale.value = withSequence(withSpring(1.1), withSpring(1));
+    })
     .onEnd(() => onScore(1, 'tap'));
 
   // Double tap gesture
   const doubleTap = Gesture.Tap()
     .runOnJS(true)
     .numberOfTaps(2)
+    .onStart(() => {
+      scale.value = withSequence(withSpring(1.2), withSpring(1));
+    })
     .onEnd(() => onScore(2, 'doubleTap'));
 
   // Long press gesture
@@ -24,18 +45,41 @@ const ClickableObject = ({ onScore }) => {
     .runOnJS(true)
     .minDuration(3000)
     .maxDistance(50)
-    .onStart(() => onScore(3, 'longPress'));
+    .onStart(() => {
+      opacity.value = withSequence(
+        withTiming(0.5, { duration: 200 }),
+        withTiming(1, { duration: 200 })
+      );
+      onScore(3, 'longPress');
+    });
 
   // Pan gesture
   const pan = Gesture.Pan()
     .runOnJS(true)
-    .onEnd(() => onScore(0, 'pan'));
+    .onUpdate((e) => {
+      offset.value = {
+        x: e.translationX + start.value.x,
+        y: e.translationY + start.value.y,
+      };
+    })
+    .onEnd(() => {
+      start.value = {
+        x: offset.value.x,
+        y: offset.value.y,
+      };
+      onScore(0, 'pan');
+    });
 
   // Fling right gesture
   const flingRight = Gesture.Fling()
     .runOnJS(true)
     .direction(Directions.RIGHT)
     .onStart(() => {
+      rotate.value = withSequence(
+        withTiming(15, { duration: 100 }),
+        withTiming(-15, { duration: 100 }),
+        withTiming(0, { duration: 100 })
+      );
       onScore(Math.floor(Math.random() * 10) + 1, 'swipeRight');
     });
 
@@ -44,13 +88,24 @@ const ClickableObject = ({ onScore }) => {
     .runOnJS(true)
     .direction(Directions.LEFT)
     .onStart(() => {
+      rotate.value = withSequence(
+        withTiming(-15, { duration: 100 }),
+        withTiming(15, { duration: 100 }),
+        withTiming(0, { duration: 100 })
+      );
       onScore(Math.floor(Math.random() * 10) + 1, 'swipeLeft');
     });
 
   // Pinch gesture
   const pinch = Gesture.Pinch()
     .runOnJS(true)
-    .onEnd(() => onScore(14, 'pinch'));
+    .onUpdate((e) => {
+      scale.value = savedScale.value * e.scale;
+    })
+    .onEnd(() => {
+      savedScale.value = scale.value;
+      onScore(14, 'pinch');
+    });
 
   // Combine gestures
   const gestures = Gesture.Simultaneous(
@@ -61,11 +116,22 @@ const ClickableObject = ({ onScore }) => {
     Gesture.Exclusive(doubleTap, tap, longPress)
   );
 
+  // Animated styles
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: offset.value.x },
+      { translateY: offset.value.y },
+      { scale: scale.value },
+      { rotateZ: `${rotate.value}deg` },
+    ],
+    opacity: opacity.value,
+  }));
+
   return (
     <GestureDetector gesture={gestures}>
-      <Image
+      <Animated.Image
         source={require('../assets/clickable.png')}
-        style={styles.image}
+        style={[styles.image, animatedStyle]}
         resizeMode="contain"
       />
     </GestureDetector>
