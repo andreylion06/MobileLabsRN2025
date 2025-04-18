@@ -21,7 +21,7 @@ const GameInfoCol = styled.View`
 const GameName = styled.Text`
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: ${({ theme }) => theme.text};
 `;
 
 const PlatformInfo = styled.View`
@@ -32,7 +32,7 @@ const PlatformInfo = styled.View`
 
 const PlatformLabel = styled.Text`
   font-size: 13px;
-  color: #aaa;
+  color: ${({ theme }) => theme.textSecondary};
 `;
 
 const PriceSection = styled.View`
@@ -47,18 +47,18 @@ const PriceLine = styled.View`
 
 const OldPrice = styled.Text`
   font-size: 13px;
-  color: #888;
+  color: ${({ theme }) => theme.textSecondary};
   text-decoration: line-through;
   margin-right: 6px;
 `;
 
 const CurrentPrice = styled.Text`
   font-size: 16px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.text};
 `;
 
 const SaleTag = styled.View`
-  background-color: #2ecc71;
+  background-color: ${({ theme }) => theme.primary};
   padding: 3px 6px;
   border-radius: 6px;
   margin-top: 4px;
@@ -66,7 +66,7 @@ const SaleTag = styled.View`
 `;
 
 const SaleText = styled.Text`
-  color: #fff;
+  color: ${({ theme }) => theme.buttonText};
   font-size: 11px;
   font-weight: bold;
 `;

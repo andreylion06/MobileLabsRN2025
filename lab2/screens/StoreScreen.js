@@ -60,7 +60,7 @@ const gameList = [
 
 const ScreenWrapper = styled.View`
   flex: 1;
-  background-color: #101010;
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const ListWrapper = styled.View`
@@ -77,7 +77,7 @@ export default function StoreScreen() {
     if (loadingMoreFeatured) return;
     setLoadingMoreFeatured(true);
     setTimeout(() => {
-      setFeaturedList(prev => [...prev, featuredGame]);
+      setFeaturedList((prev) => [...prev, featuredGame]);
       setLoadingMoreFeatured(false);
     }, 1500);
   };
@@ -86,7 +86,7 @@ export default function StoreScreen() {
     if (loadingMoreItems) return;
     setLoadingMoreItems(true);
     setTimeout(() => {
-      setStoreItems(prev => [...prev, ...gameList]);
+      setStoreItems((prev) => [...prev, ...gameList]);
       setLoadingMoreItems(false);
     }, 1500);
   };
@@ -107,10 +107,10 @@ export default function StoreScreen() {
         onEndReached={loadMoreFeatured}
         onEndReachedThreshold={0.5}
         style={{
-            marginTop: 18,
-            marginLeft: 20,
-            minHeight: 230,
-          }}
+          marginTop: 18,
+          marginLeft: 20,
+          minHeight: 230,
+        }}
       />
 
       <ListWrapper>

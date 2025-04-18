@@ -1,48 +1,68 @@
-// components/FilterTabs.js
 import { useState } from "react";
 import styled from "styled-components/native";
 import { FlatList } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-const Container = styled.View`
+const TabsWrapper = styled.View`
   flex-direction: row;
-  margin-left: 20px;
-  margin-top: 8px;
+  padding-left: 20px;
+  align-items: center;
 `;
 
-const Tab = styled.TouchableOpacity`
-  background-color: ${({ active }) => (active ? "#2dcdf5" : "#2b2d3a")};
-  padding: 8px 14px;
+const TabItem = styled.TouchableOpacity`
+  background-color: ${({ isActive }) =>
+    isActive ? "#00cfff" : "transparent"};
+  padding: 7px 14px;
   border-radius: 10px;
   margin-right: 10px;
 `;
 
 const TabText = styled.Text`
-  color: #ffffff;
   font-size: 14px;
-  font-weight: 500;
+  color: ${({ isActive, theme }) =>
+    isActive ? theme.buttonText : theme.textSecondary};
 `;
 
-export default function FilterTabs({ tabs, onTabChange }) {
-  const [activeTab, setActiveTab] = useState(tabs[0]);
+const SearchButton = styled(Ionicons).attrs({
+  name: "search-outline",
+  size: 20,
+})`
+  color: ${({ theme }) => theme.textSecondary};
+  margin-right: 10px;
+`;
 
-  const handleTabPress = (tab) => {
-    setActiveTab(tab);
-    if (onTabChange) onTabChange(tab);
+export default function FilterTabs({ tabs, onTabChange, showSearch = false }) {
+  const [selectedTab, setSelectedTab] = useState(tabs[0]);
+
+  const handleSelect = (tabLabel) => {
+    setSelectedTab(tabLabel);
+    if (onTabChange) {
+      onTabChange(tabLabel);
+    }
   };
 
   return (
-    <Container>
+    <TabsWrapper>
+      {showSearch && (
+        <TabItem isActive={false}>
+          <SearchButton />
+        </TabItem>
+      )}
       <FlatList
-        data={tabs}
         horizontal
+        data={tabs}
         keyExtractor={(item) => item}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
-          <Tab active={activeTab === item} onPress={() => handleTabPress(item)}>
-            <TabText>{item}</TabText>
-          </Tab>
+          <TabItem
+            key={item}
+            isActive={selectedTab === item}
+            onPress={() => handleSelect(item)}
+          >
+            <TabText isActive={selectedTab === item}>{item}</TabText>
+          </TabItem>
         )}
       />
-    </Container>
+    </TabsWrapper>
   );
 }

@@ -26,7 +26,7 @@ const StatusDot = styled.View`
   height: 14px;
   border-radius: 7px;
   background-color: ${({ online }) => (online ? "#28c76f" : "#3498db")};
-  border: 2px solid #111111;
+  border: 2px solid ${({ theme }) => theme.background};
 `;
 
 const ChatContent = styled.View`
@@ -35,7 +35,7 @@ const ChatContent = styled.View`
 
 const UserLabel = styled.Text`
   font-size: 16px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.text};
   font-weight: 500;
 `;
 
@@ -46,18 +46,18 @@ const MessageRow = styled.View`
 `;
 
 const PreviewText = styled.Text`
-  color: #aaaaaa;
+  color: ${({ theme }) => theme.textSecondary};
   font-size: 14px;
 `;
 
 const TimeText = styled.Text`
-  color: #888888;
+  color: ${({ theme }) => theme.textSecondary};
   font-size: 13px;
   margin-left: 6px;
 `;
 
 const UnreadBadge = styled.View`
-  background-color: #ff5c5c;
+  background-color: ${({ theme }) => theme.discountColor};
   width: 20px;
   height: 20px;
   border-radius: 10px;
@@ -66,7 +66,7 @@ const UnreadBadge = styled.View`
 `;
 
 const UnreadCount = styled.Text`
-  color: #ffffff;
+  color: ${({ theme }) => theme.buttonText};
   font-size: 12px;
 `;
 
@@ -78,7 +78,7 @@ const DotIndicator = styled.View`
   width: 8px;
   height: 8px;
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.text};
   margin-top: 4px;
 `;
 

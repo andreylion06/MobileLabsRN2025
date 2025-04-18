@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 const Card = styled.View`
-  background-color: #2a2a2a;
+  background-color: ${({ theme }) => theme.cardBackground};
   border-radius: 10px;
   overflow: hidden;
   height: 230px;
@@ -47,8 +47,8 @@ const PriceRow = styled.View`
 `;
 
 const DiscountTag = styled.Text`
-  background-color: #2ecc71;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.discountColor};
+  color: ${({ theme }) => theme.buttonText};
   padding: 3px 5px;
   border-radius: 3px 0 0 3px;
   margin-right: 8px;

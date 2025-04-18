@@ -43,7 +43,7 @@ const initialChats = [
 
 const ScreenWrapper = styled.View`
   flex: 1;
-  background-color: #111111;
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const tabs = ["Open chats", "My friends"];
