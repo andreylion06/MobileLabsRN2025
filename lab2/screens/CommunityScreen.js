@@ -9,7 +9,7 @@ const posts = [
   {
     id: 1,
     username: "SteamInsider",
-    avatar: require("../assets/img/post-avatar.png"),
+    avatar: require("../assets/img/avatar-1.png"),
     timestamp: "2 days ago • 11:45 am",
     isNews: true,
     image: require("../assets/img/factorio.png"),
@@ -21,8 +21,8 @@ const posts = [
   },
   {
     id: 2,
-    username: "PixelPulse",
-    avatar: require("../assets/img/post-avatar.png"),
+    username: "SteamInsider",
+    avatar: require("../assets/img/avatar-1.png"),
     timestamp: "Yesterday • 5:10 pm",
     isNews: false,
     image: require("../assets/img/horizon.png"),
