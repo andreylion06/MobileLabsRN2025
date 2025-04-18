@@ -3,7 +3,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { FlatList, View } from "react-native";
 
 const OptionButton = styled.TouchableOpacity`
-  background-color: #1e1e1e;
+  background-color: ${({ theme }) => theme.cardBackground};
   padding: 18px 20px;
   margin: 0 20px;
   flex-direction: row;
@@ -17,7 +17,7 @@ const OptionButton = styled.TouchableOpacity`
 `;
 
 const OptionLabel = styled.Text`
-  color: #ffffff;
+  color: ${({ theme }) => theme.text};
   font-size: 16px;
 `;
 
