@@ -14,6 +14,20 @@ npm run android
 
 ### lab2
 
+#### dark theme
+![StoreScreen](screenshots/lab2-main-dark.png)
+![CommunityScreen](screenshots/lab2-community-dark.png)
+![ChatScreen](screenshots/lab2-chat-dark.png)
+![SafetyScreen](screenshots/lab2-safety-dark.png)
+![ProfileScreen](screenshots/lab2-profile-dark.png)
+
+#### light theme
+![StoreScreen](screenshots/lab2-main-light.png)
+![CommunityScreen](screenshots/lab2-community-light.png)
+![ChatScreen](screenshots/lab2-chat-light.png)
+![SafetyScreen](screenshots/lab2-safety-light.png)
+![ProfileScreen](screenshots/lab2-profile-light.png)
+
 ### lab3
 ![Головний екран](screenshots/lab3-main.png)
 ![Завдання](screenshots/lab3-tasks.png)
@@ -21,5 +35,3 @@ npm run android
 ### lab4
 
 ### lab5
-
-### lab6
