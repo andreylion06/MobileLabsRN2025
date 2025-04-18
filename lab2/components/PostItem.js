@@ -5,7 +5,7 @@ import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 const PostBox = styled.View`
-  background-color: #121212;
+  background-color: ${({ theme }) => theme.cardBackground};
   padding: 16px 20px;
 `;
 
@@ -31,7 +31,7 @@ const AvatarImg = styled.Image`
 const NameTimeBlock = styled.View``;
 
 const UserNameText = styled.Text`
-  color: #ffffff;
+  color: ${({ theme }) => theme.text};
   font-size: 16px;
   font-weight: 500;
 `;
@@ -50,7 +50,7 @@ const BadgeLabel = styled.Text`
 `;
 
 const TimeText = styled.Text`
-  color: #999;
+  color: ${({ theme }) => theme.textSecondary};
   font-size: 12px;
   margin-top: 2px;
 `;
@@ -64,26 +64,26 @@ const ContentImg = styled.Image`
 
 const PostHeading = styled.Text`
   font-size: 16px;
-  color: #f2f2f2;
+  color: ${({ theme }) => theme.text};
   margin-bottom: 6px;
 `;
 
 const PostText = styled.Text`
   font-size: 14px;
-  color: #b3b3b3;
+  color: ${({ theme }) => theme.textSecondary};
   margin-bottom: 12px;
 `;
 
 const Divider = styled.View`
   height: 8px;
-  background-color: #1e1e1e;
+  background-color: ${({ theme }) => theme.strokeTint};
 `;
 
 const ActionBar = styled.View`
   flex-direction: row;
   justify-content: space-between;
   border-top-width: 1px;
-  border-top-color: #2b2b2b;
+  border-top-color: ${({ theme }) => theme.strokeTint};
   padding-top: 12px;
 `;
 
@@ -105,18 +105,18 @@ const LikeIcon = styled(Feather)`
 `;
 
 const CommentIcon = styled(Feather)`
-  color: #aaa;
+  color: ${({ theme }) => theme.textSecondary};
   font-size: 18px;
   margin-right: 5px;
 `;
 
 const ShareIcon = styled(FontAwesome)`
-  color: #aaa;
+  color: ${({ theme }) => theme.textSecondary};
   font-size: 18px;
 `;
 
 const ActionText = styled.Text`
-  color: #ccc;
+  color: ${({ theme }) => theme.textSecondary};
 `;
 
 export default function PostItem({ post }) {

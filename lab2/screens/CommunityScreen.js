@@ -34,15 +34,14 @@ const posts = [
   },
 ];
 
-
 const ScreenWrapper = styled.View`
   flex: 1;
-  background-color: #111;
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const Subtext = styled.Text`
   font-size: 14px;
-  color: #bbbbbb;
+  color: ${({ theme }) => theme.textSecondary};
   margin-top: -8px;
   margin-bottom: 20px;
   padding: 0 18px;
@@ -64,13 +63,12 @@ export default function CommunityScreen() {
     setTimeout(() => {
       const newPosts = posts.map((post) => ({
         ...post,
-        id: `${post.id}-${Date.now()}` // робимо кожен ID унікальним
+        id: `${post.id}-${Date.now()}`
       }));
       setFeedData((current) => [...current, ...newPosts]);
       setIsFetching(false);
     }, 1200);
   };
-
 
   return (
     <ScreenWrapper>

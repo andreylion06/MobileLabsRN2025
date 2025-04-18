@@ -14,20 +14,20 @@ const menuItems = [
 
 const ScreenContainer = styled.View`
   flex: 1;
-  background-color: #111111;
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const Title = styled.Text`
   font-size: 54px;
   font-weight: bold;
   text-align: center;
-  color: #ffffff;
+  color: ${({ theme }) => theme.text};
   margin-top: 4px;
 `;
 
 const Subtitle = styled.Text`
   text-align: center;
-  color: #bbbbbb;
+  color: ${({ theme }) => theme.textSecondary};
   font-size: 14px;
   margin-top: 26px;
 `;
@@ -35,7 +35,7 @@ const Subtitle = styled.Text`
 const ProgressBar = styled.View`
   width: 157px;
   height: 7px;
-  background-color: #222222;
+  background-color: ${({ theme }) => theme.strokeTint};
   border-radius: 3.5px;
   margin-top: 11px;
   overflow: hidden;
@@ -44,17 +44,17 @@ const ProgressBar = styled.View`
 const Progress = styled.View`
   width: 70%;
   height: 100%;
-  background-color: #1ab0f2;
+  background-color: ${({ theme }) => theme.textHighlight};
 `;
 
 const Description = styled.Text`
-  color: #e0e0e0;
+  color: ${({ theme }) => theme.text};
   font-size: 14px;
   margin: 25px 20px 0;
 `;
 
 const Tip = styled.Text`
-  color: #1ab0f2;
+  color: ${({ theme }) => theme.textHighlight};
   font-size: 14px;
   margin: 14px 20px 24px;
 `;
