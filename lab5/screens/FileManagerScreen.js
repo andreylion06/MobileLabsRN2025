@@ -11,6 +11,8 @@ export default function FileManagerScreen({ navigation }) {
   const [isCreatingFolder, setIsCreatingFolder] = useState(true);
   const [inputName, setInputName] = useState('');
   const [fileContent, setFileContent] = useState('');
+  const [infoModalVisible, setInfoModalVisible] = useState(false);
+  const [fileInfo, setFileInfo] = useState(null);
 
   useEffect(() => {
     loadDirectory(currentPath);
@@ -114,6 +116,25 @@ export default function FileManagerScreen({ navigation }) {
     }
   };
 
+  const showInfo = async (itemName) => {
+    const itemPath = currentPath + itemName;
+    try {
+      const info = await FileSystem.getInfoAsync(itemPath, { size: true });
+      if (info.exists) {
+        setFileInfo({
+          name: itemName,
+          isDirectory: info.isDirectory,
+          size: info.size,
+          modificationTime: info.modificationTime,
+          extension: itemName.includes('.') ? itemName.split('.').pop() : 'Folder',
+        });
+        setInfoModalVisible(true);
+      }
+    } catch (error) {
+      console.error('Error getting file info:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -133,6 +154,9 @@ export default function FileManagerScreen({ navigation }) {
               style={styles.itemTextContainer}
             >
               <Text>{item}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => showInfo(item)} style={styles.infoButton}>
+              <Text style={styles.infoButtonText}>ℹ️</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => confirmDelete(item)} style={styles.deleteButton}>
               <Text style={styles.deleteButtonText}>🗑️</Text>
@@ -171,6 +195,23 @@ export default function FileManagerScreen({ navigation }) {
           </View>
         </View>
       </Modal>
+
+      <Modal visible={infoModalVisible} animationType="slide" transparent={true}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            {fileInfo && (
+              <>
+                <Text style={styles.modalTitle}>File Info</Text>
+                <Text>Name: {fileInfo.name}</Text>
+                <Text>Type: {fileInfo.isDirectory ? 'Folder' : fileInfo.extension + ' File'}</Text>
+                <Text>Size: {fileInfo.size} bytes</Text>
+                <Text>Last Modified: {new Date(fileInfo.modificationTime * 1000).toLocaleString()}</Text>
+              </>
+            )}
+            <Button title="Close" onPress={() => setInfoModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -206,4 +247,29 @@ const styles = StyleSheet.create({
   modalContent: { backgroundColor: 'white', padding: 20, borderRadius: 10, width: '80%' },
   modalTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 10, textAlign: 'center' },
   input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 8, marginBottom: 10 },
+  infoButton: {
+    paddingHorizontal: 10,
+  },
+  infoButtonText: {
+    fontSize: 18,
+    color: 'blue',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
 });
