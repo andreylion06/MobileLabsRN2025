@@ -88,6 +88,32 @@ export default function FileManagerScreen({ navigation }) {
     setModalVisible(false);
   };
 
+  const confirmDelete = (itemName) => {
+    Alert.alert(
+      'Delete',
+      `Are you sure you want to delete "${itemName}"?`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Delete', style: 'destructive', onPress: () => deleteItem(itemName) },
+      ]
+    );
+  };
+
+  const deleteItem = async (itemName) => {
+    const itemPath = currentPath + itemName;
+    try {
+      const itemInfo = await FileSystem.getInfoAsync(itemPath);
+      if (itemInfo.isDirectory) {
+        await FileSystem.deleteAsync(itemPath, { idempotent: true });
+      } else {
+        await FileSystem.deleteAsync(itemPath);
+      }
+      loadDirectory(currentPath);
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -101,9 +127,17 @@ export default function FileManagerScreen({ navigation }) {
         data={items}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleItemPress(item)} style={styles.item}>
-            <Text>{item}</Text>
-          </TouchableOpacity>
+          <View style={styles.itemRow}>
+            <TouchableOpacity
+              onPress={() => handleItemPress(item)}
+              style={styles.itemTextContainer}
+            >
+              <Text>{item}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => confirmDelete(item)} style={styles.deleteButton}>
+              <Text style={styles.deleteButtonText}>🗑️</Text>
+            </TouchableOpacity>
+          </View>
         )}
         ListEmptyComponent={<Text style={styles.empty}>No files or folders</Text>}
       />
@@ -147,6 +181,24 @@ const styles = StyleSheet.create({
   backButton: { marginRight: 10, color: 'blue' },
   disabled: { color: 'gray' },
   pathText: { fontWeight: 'bold', flexShrink: 1 },
+  itemRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  itemTextContainer: {
+    flex: 1,
+  },
+  deleteButton: {
+    paddingHorizontal: 10,
+  },
+  deleteButtonText: {
+    fontSize: 18,
+    color: 'red',
+  },
   item: { padding: 10, borderBottomWidth: 1, borderBottomColor: '#ccc' },
   empty: { textAlign: 'center', marginTop: 20 },
   buttonRow: { flexDirection: 'row', justifyContent: 'space-around', marginTop: 10 },
