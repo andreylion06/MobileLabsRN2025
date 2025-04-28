@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77af72e6-e726-4bb4-ae64-a2439254386a" name="Changes" comment="README: hotfix" />
+    <list default="true" id="77af72e6-e726-4bb4-ae64-a2439254386a" name="Changes" comment="README: fixed lab2-safety-dark.png">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,9 +18,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;andreylion06&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/andreylion06/MobileLabsRN2025.git&quot;,
+    &quot;accountId&quot;: &quot;3dbbe8e0-3ed7-452c-be20-9e589f3ca8c0&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2vrgzfcc6BUbQSZtJLbsnGbHbXy" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,7 +48,7 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Andrii Sakhno/Desktop/ua-un/8th semester/react/MobileLabsRN2025/lab2",
+    "last_opened_file_path": "C:/Users/Andrii Sakhno/Desktop/ua-un/8th semester/react/MobileLabsRN2025/lab5",
     "settings.editor.selected.configurable": "AndroidSdkUpdater"
   }
 }]]></component>
@@ -63,12 +77,30 @@
       <option name="project" value="LOCAL" />
       <updated>1744909467139</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="README: screenshots to lab2">
+      <option name="closed" value="true" />
+      <created>1745017231982</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745017231982</updated>
+    </task>
+    <task id="LOCAL-00004" summary="README: fixed lab2-safety-dark.png">
+      <option name="closed" value="true" />
+      <created>1745017407228</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745017407228</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="README: screenshots to lab1, lab3" />
     <MESSAGE value="README: hotfix" />
-    <option name="LAST_COMMIT_MESSAGE" value="README: hotfix" />
+    <MESSAGE value="README: screenshots to lab2" />
+    <MESSAGE value="README: fixed lab2-safety-dark.png" />
+    <option name="LAST_COMMIT_MESSAGE" value="README: fixed lab2-safety-dark.png" />
   </component>
 </project>
