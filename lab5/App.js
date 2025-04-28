@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen';
+import FileManagerScreen from './screens/FileManagerScreen';
 import * as FileSystem from 'expo-file-system';
 
+const Stack = createNativeStackNavigator();
 const APP_DATA_DIR = FileSystem.documentDirectory + 'AppData/';
 
 export default function App() {
@@ -13,11 +17,7 @@ export default function App() {
     try {
       const dirInfo = await FileSystem.getInfoAsync(APP_DATA_DIR);
       if (!dirInfo.exists) {
-        console.log('AppData directory does not exist, creating...');
         await FileSystem.makeDirectoryAsync(APP_DATA_DIR, { intermediates: true });
-        console.log('AppData directory created successfully');
-      } else {
-        console.log('AppData directory already exists');
       }
     } catch (error) {
       console.error('Error while initializing AppData directory:', error);
@@ -25,8 +25,11 @@ export default function App() {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Welcome to File Manager App!</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="FileManager" component={FileManagerScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
