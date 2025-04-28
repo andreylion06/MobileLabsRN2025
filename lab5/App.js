@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import FileManagerScreen from './screens/FileManagerScreen';
+import EditFileScreen from './screens/EditFileScreen';
 import * as FileSystem from 'expo-file-system';
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="FileManager" component={FileManagerScreen} />
+        <Stack.Screen name="EditFile" component={EditFileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

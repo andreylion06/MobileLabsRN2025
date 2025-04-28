@@ -4,7 +4,7 @@ import * as FileSystem from 'expo-file-system';
 
 const BASE_DIR = FileSystem.documentDirectory + 'AppData/';
 
-export default function FileManagerScreen() {
+export default function FileManagerScreen({ navigation }) {
   const [currentPath, setCurrentPath] = useState(BASE_DIR);
   const [items, setItems] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -26,13 +26,15 @@ export default function FileManagerScreen() {
   };
 
   const handleItemPress = async (itemName) => {
-    const itemPath = currentPath + itemName + '/';
+    const itemPath = currentPath + itemName;
     const itemInfo = await FileSystem.getInfoAsync(itemPath);
 
     if (itemInfo.isDirectory) {
-      setCurrentPath(itemPath);
+      setCurrentPath(itemPath + '/');
+    } else if (itemName.endsWith('.txt')) {
+      navigation.navigate('EditFile', { filePath: itemPath });
     } else {
-      Alert.alert('Info', 'This is a file.');
+      Alert.alert('Info', 'This file type is not supported for viewing.');
     }
   };
 
