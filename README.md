@@ -35,3 +35,12 @@ npm run android
 ### lab4
 
 ### lab5
+![Головний екран](screenshots/lab5-main.png)
+![Файловий менеджер](screenshots/lab5-file-manager.png)
+![Створення файла](screenshots/lab5-file-creating.png)
+![Створення папки](screenshots/lab5-folder-creating.png)
+![Видалення файла](screenshots/lab5-file-deleting.png)
+![Редагування файла](screenshots/lab5-file-editing.png)
+![Детальна інформація про файл](screenshots/lab5-file-info.png)
+
+### lab6
